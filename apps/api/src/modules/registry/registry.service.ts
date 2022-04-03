@@ -1,6 +1,7 @@
 import { ConflictException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { Model, Types } from "mongoose";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { User, UserDocument } from "./schemas/user.schema";
 
@@ -35,6 +36,24 @@ export class RegistryService {
     }
 
     return user.toJSON();
+  }
+
+  async deleteById(userIds: string[]): Promise<User[]> {
+    const objectIds = userIds.map((id) => Types.ObjectId.createFromHexString(id));
+    await this.userModel.deleteMany({ _id: { $in: objectIds } });
+    return this.getAll();
+  }
+
+  async updateById(userId: string, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.userModel.findById(userId).exec();
+
+    if (!user) {
+      throw new NotFoundException("User with this id not found!");
+    }
+
+    await this.userModel.findByIdAndUpdate(userId, updateUserDto);
+
+    return this.getById(userId);
   }
 
   async getAll(): Promise<User[]> {

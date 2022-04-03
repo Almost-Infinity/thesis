@@ -13,7 +13,7 @@ import { Document } from "mongoose";
   }
 })
 
-export class User implements Omit<IUser, 'id' | 'createdAt' | 'updatedAt'> {
+export class User implements Omit<IUser, "id" | "createdAt" | "updatedAt"> {
   @Prop({ type: String, required: true })
   first_name: string;
 
@@ -34,6 +34,9 @@ export class User implements Omit<IUser, 'id' | 'createdAt' | 'updatedAt'> {
 
   @Prop({ type: String, required: true, unique: true })
   passport: string;
+
+  @Prop({ type: String, required: true })
+  address: string;
 }
 
 export type UserDocument = User & Document;

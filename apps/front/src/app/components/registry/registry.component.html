@@ -1,0 +1,23 @@
+<header>
+  <button (click)="onAddUserClick()" color="primary" mat-flat-button>
+    <mat-icon>add</mat-icon>
+    Створити користувача
+  </button>
+
+  <button (click)="onDeleteUsersClick()" [disabled]="!isRowsSelected" color="warn" mat-flat-button>
+    <mat-icon>delete</mat-icon>
+    Видалити користувача(-ів)
+  </button>
+</header>
+
+<mat-divider></mat-divider>
+
+<ag-grid-angular
+  (cellValueChanged)="onCellValueChanged($event)"
+  (gridReady)="onGridReady($event)"
+  (modelUpdated)="onModelUpdated($event)"
+  [columnDefs]="colsDef"
+  [gridOptions]="gridOptions"
+  class="ag-theme-material"
+  style="width: 100%;height: calc(100% - 56px)"
+></ag-grid-angular>

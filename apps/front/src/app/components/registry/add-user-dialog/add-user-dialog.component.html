@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>Створення користувача</h1>
+<div mat-dialog-content>
+  <form [formGroup]="newUserForm">
+    <div>
+      <mat-form-field appearance="fill" style="padding: 2px">
+        <mat-label>Прізвище</mat-label>
+        <input formControlName="last_name" matInput maxlength="45" minlength="2" type="text">
+        <mat-error *ngIf="hasErrors('last_name')">{{ getInputError('last_name') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="padding: 2px">
+        <mat-label>Ім'я</mat-label>
+        <input formControlName="first_name" matInput maxlength="45" minlength="2" type="text">
+        <mat-error *ngIf="hasErrors('first_name')">{{ getInputError('first_name') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="padding: 2px">
+        <mat-label>По-батькові</mat-label>
+        <input formControlName="middle_name" matInput maxlength="45" minlength="2" type="text">
+        <mat-error *ngIf="hasErrors('middle_name')">{{ getInputError('middle_name') }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill" style="box-sizing: border-box; width: 50%; padding: 2px">
+        <mat-label>Дата народження</mat-label>
+        <input formControlName="birthday" matInput type="date">
+        <mat-error *ngIf="hasErrors('birthday')">{{ getInputError('birthday') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="box-sizing: border-box; width: 50%; padding: 2px">
+        <mat-label>Номер телефону</mat-label>
+        <input formControlName="phone" matInput maxlength="13" type="tel">
+        <mat-error *ngIf="hasErrors('phone')">{{ getInputError('phone') }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill" style="box-sizing: border-box; width: 50%; padding: 2px">
+        <mat-label>ІПН</mat-label>
+        <input formControlName="tax_id" matInput maxlength="10" type="text">
+        <mat-error *ngIf="hasErrors('tax_id')">{{ getInputError('tax_id') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="box-sizing: border-box; width: 50%; padding: 2px">
+        <mat-label>Номер паспорту</mat-label>
+        <input formControlName="passport" matInput maxlength="9" type="text">
+        <mat-error *ngIf="hasErrors('passport')">{{ getInputError('passport') }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill" style="box-sizing: border-box; width: 100%; padding: 2px">
+        <mat-label>Адреса реєстрації</mat-label>
+        <input formControlName="address" matInput maxlength="128" type="text">
+        <mat-error *ngIf="hasErrors('address')">{{ getInputError('address') }}</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onNoClick()" mat-flat-button>Відміна</button>
+  <button (click)="onAddClick()" [disabled]="newUserForm.invalid" color="primary" mat-flat-button>
+    Додати
+  </button>
+</div>

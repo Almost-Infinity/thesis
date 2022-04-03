@@ -7,6 +7,7 @@ export interface IUser {
   phone: string;
   tax_id: string;
   passport: string;
+  address: string;
   createdAt: string;
   updatedAt: string;
 }
